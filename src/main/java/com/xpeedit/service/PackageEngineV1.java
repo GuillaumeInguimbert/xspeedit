@@ -24,12 +24,21 @@ public class PackageEngineV1 extends PackageEngineBase{
                 .forEach(product -> getOrCreateRelevantPackage(product.getSize()).ifPresent(aPackage -> aPackage.add(product)));
     }
 
+    /**
+     * Find the Package with a capacity as biggest as possible of the specified one.
+     * If no package can be found, create a new empty one if the storage space is not full.
+     * @param capacity The ideal capacity.
+     * @return The package, or empty if the storage space is full.
+     */
     private Optional<Package> getOrCreateRelevantPackage(int capacity) {
+        // Find the Package with the biggest possible capacity
         Optional<Package> aPackage = getPackagesWhereCapacityHigherOrEqualsThan(capacity)
                 .max(Package::compareTo);
+        // If a package is found, return it
         if (aPackage.isPresent()){
             return aPackage;
         }
+        // Else try to add a new empty package (if possible) and return it
         else if (!storageRepository.isFull()){
             return Optional.of(storageRepository.createPackageAndGet());
         }
