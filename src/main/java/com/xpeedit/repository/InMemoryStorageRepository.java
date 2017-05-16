@@ -12,7 +12,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.springframework.util.CollectionUtils.isEmpty;
 
@@ -51,21 +50,9 @@ public class InMemoryStorageRepository extends Storage implements StorageReposit
     }
 
     /**
-     *  Select all packages having a capacity higher or equals than the specified capacity.
-     *
-     * @param capacity The needed capacity.
-     * @return All packages having a capacity higher or equals to the specified capacity.
-     */
-    @Override
-    public Stream<Package> getPackagesWhereCapacityHigherOrEqualsThan(int capacity){
-        return getPackages().stream()
-                .filter(aPackage -> aPackage.getRemainingCapacity() >= capacity);
-    }
-
-    /**
      * Add an empty package in the storage space and return it.
      * @return The package.
-     * @throws CapacityException
+     * @throws CapacityException if the package can't be added because the storage if full.
      */
     @Override
     public Package createPackageAndGet() throws CapacityException {

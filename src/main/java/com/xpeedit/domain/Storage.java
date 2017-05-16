@@ -18,6 +18,11 @@ public class Storage extends Capacity implements Serializable {
         return packages;
     }
 
+    /**
+     * Add a package in the storage space.
+     * @param aPackage The package to add.
+     * @throws CapacityException if the package can't be added because the storage if full.
+     */
     protected void add(Package aPackage) throws CapacityException {
         if(getRemainingCapacity() == 0){
             throw new CapacityException("Add package to the storage error.", this);

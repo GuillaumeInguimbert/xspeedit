@@ -1,6 +1,9 @@
 XspeedIt
 ========
 
+1. [Objectif](#Objectif)
+2. [Solution](#Objectif)
+
 XspeedIt est une société d'import / export ayant robotisé toute sa chaîne d'emballage de colis.  
 Elle souhaite trouver un algorithme permettant à ses robots d'optimiser le nombre de cartons d'emballage utilisés.
 
@@ -23,7 +26,7 @@ Si la taille totale dépasse la contenance du carton, le robot met l'article dan
 
 Objectif
 --------
-
+<a name="Objectif"></a>
 Implémenter un algorithme qui permettrait de maximiser le nombre d'articles par carton, en utilisant un langage pouvant être exécuté sur une JVM 1.7 minimum ou en node.js.  
 L'ordre des cartons et des articles n'a pas d'importance.
 
@@ -36,16 +39,27 @@ Robot optimisé: 163/82/46/19/8/55/73/7   => 8  cartons utilisés
 
 Solution
 --------
+<a name="Solution"></a>
 #### Stack technique
 - Java 8
 - Spring Boot pour une configuration simplifiée de l'application 
-- Maven pour build/test/run
+- Maven pour build/test
 
 #### Organisation du code
-test/com.xpeedit.service
+> **Packages:**
+>- **com.xpeedit.domain** Entités (paquet, produit, stokage)
+>- **com.xpeedit.repository** Couche d'accès aux données (les paquets dans l'espace de stockage)
+>- **com.xpeedit.service** Services de distribution des produits dans les paquets.
+Deux implémentations sont proposées:
+PackageEngineV1 et PackageEngineV2.
+
+Pour chaque implémentation (V1 et V2), des tests unitaires permettent de valider la bonne répartition des produits dans les paquets.
 
 #### Installation et démarrage
-- Installer Java 8 (depuis le Oracle website).
-- (Optionnel) Installer Maven 3.5.
-You normally don’t have to install anything, as it will automatically install the Maven Wrapper for you.
-> mvnw.cmd test
+- Installer Java 8 (depuis le website Oracle).
+- (Optionnel) Installer Maven 3.5. Normalement pas besoin de l'installer, maven sera automatiquement installé au démarrage du script mvnw.
+> **Lancer les tests:**
+>- mvnw.cmd test
+
+> **Lancer en ligne de commande avec la chaine de produits en argument:**
+>- mvnw.cmd spring-boot:run -Drun.arguments="--products=163841689525773"

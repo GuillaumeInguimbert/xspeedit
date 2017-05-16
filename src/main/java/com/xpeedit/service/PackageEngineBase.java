@@ -24,8 +24,10 @@ public abstract class PackageEngineBase implements PackageEngine {
 
     @Override
     public synchronized List<String> distributeAndDeliver(final String productChain) throws Exception {
+        // Parse the chain and map it to a list of products.
         Optional<List<Product>> products = scanProducts(productChain);
         if (products.isPresent()){
+            // Distribute all products and make deliveries as many as necessary
             while (products.get().stream().anyMatch(Product::waitingForDistribution)){
                 distribute(products.get());
                 deliver();
@@ -39,8 +41,8 @@ public abstract class PackageEngineBase implements PackageEngine {
 
     /**
      * Parse the specified product chain and map it to a list of products.
-     * @param productChain
-     * @return
+     * @param productChain The product chain as string
+     * @return The resulting list of products
      */
     private Optional<List<Product>> scanProducts(final String productChain){
         if (StringUtils.isNotBlank(productChain)){
@@ -57,6 +59,11 @@ public abstract class PackageEngineBase implements PackageEngine {
         }
     }
 
+    /**
+     *
+     * @param storageHistory - The list of deliveries to be printed.
+     * @return The list of deliveries formatted for printing.
+     */
     private List<String> printDeliveries(final List<Storage> storageHistory){
         if (!CollectionUtils.isEmpty(storageHistory)){
             return storageHistory.stream()
@@ -69,6 +76,11 @@ public abstract class PackageEngineBase implements PackageEngine {
         }
     }
 
+    /**
+     * Deliver the packages available in the storage space.
+     * Clean the storage space.
+     * @throws Exception
+     */
     private void deliver() throws Exception {
         storageRepository.saveToHistory();
         storageRepository.clear();

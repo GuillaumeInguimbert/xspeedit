@@ -59,11 +59,6 @@ public class StorageRepositoryTest {
     }
 
     @Test
-    public void getPackagesWhereCapacityHigherOrEqualsThanTest() throws Exception {
-        Assert.assertEquals(1, storageRepository.getPackagesWhereCapacityHigherOrEqualsThan(4).count());
-    }
-
-    @Test
     public void capacityTest() throws Exception {
         for (int i = 0; i < 7; i++) {
             storageRepository.createPackageAndGet();

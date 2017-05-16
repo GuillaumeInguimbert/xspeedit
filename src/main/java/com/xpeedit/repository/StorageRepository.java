@@ -16,8 +16,6 @@ public interface StorageRepository {
 
     List<Product> getAllProducts();
 
-    Stream<Package> getPackagesWhereCapacityHigherOrEqualsThan(int capacity);
-
     Package createPackageAndGet() throws CapacityException;
 
     boolean isFull();

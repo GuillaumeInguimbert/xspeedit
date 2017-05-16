@@ -42,11 +42,6 @@ public class PackageEngineV1Test extends PackageEngineTest{
     }
 
     @Test
-    public void singleDeliveryTest3() {
-        checkDeliveries(packageEngineV1, "163841689525773", singletonList("163/46/82/55/73/81/9/7"));
-    }
-
-    @Test
     public void multipleDeliveriesTest() {
         checkDeliveries(packageEngineV1, "12391219999999999999999999999999919999999999999999999999999",
                 Arrays.asList("123211/91/9/9/9/9/9/9/9/9", "9/9/9/9/9/9/9/9/9/9", "9/9/9/9/9/9/9/9/9/9", "9/9/9/9/9/9/9/9/9/9", "9/9/9/9/9/9/9/9/9/9", "9/9/9"));

@@ -13,13 +13,17 @@ import java.util.stream.Collectors;
  */
 public class Package extends Capacity implements Comparable<Package>, Serializable {
 
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
 
     public Package() {
         super();
-        products = new ArrayList<>();
     }
 
+    /**
+     * Add the product in the package.
+     * @param product The product to add.
+     * @throws CapacityException if the size of the product exceeds the remaining size of the package.
+     */
     public void add(Product product) throws CapacityException {
         if(product.getSize() > getRemainingCapacity()){
             throw new CapacityException("Add product size " + product.getSize() + " error.", this);
@@ -40,11 +44,6 @@ public class Package extends Capacity implements Comparable<Package>, Serializab
     @Override
     public int getSize() {
         return products.stream().mapToInt(Product::getSize).sum();
-    }
-
-    @Override
-    public boolean isFull() {
-        return false;
     }
 
     @Override

@@ -5,8 +5,10 @@ import com.xpeedit.domain.Product;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 /**
  * Created by GUILLAUME.INGUIMBERT on 15/05/2017.
@@ -23,7 +25,7 @@ public class PackageEngineV1 extends PackageEngineBase{
     }
 
     private Optional<Package> getOrCreateRelevantPackage(int capacity) {
-        Optional<Package> aPackage = storageRepository.getPackagesWhereCapacityHigherOrEqualsThan(capacity)
+        Optional<Package> aPackage = getPackagesWhereCapacityHigherOrEqualsThan(capacity)
                 .max(Package::compareTo);
         if (aPackage.isPresent()){
             return aPackage;
@@ -33,5 +35,16 @@ public class PackageEngineV1 extends PackageEngineBase{
         }
         else
             return Optional.empty();
+    }
+
+    /**
+     *  Select all packages having a capacity higher or equals than the specified capacity.
+     *
+     * @param capacity The needed capacity.
+     * @return All packages having a capacity higher or equals to the specified capacity.
+     */
+    private Stream<Package> getPackagesWhereCapacityHigherOrEqualsThan(int capacity){
+        return storageRepository.getAllPackages().stream()
+                .filter(aPackage -> aPackage.getRemainingCapacity() >= capacity);
     }
 }
