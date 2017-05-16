@@ -63,3 +63,6 @@ Pour chaque implémentation (V1 et V2), des tests unitaires permettent de valide
 
 > **Lancer en ligne de commande avec la chaine de produits en argument:**
 >- mvnw.cmd spring-boot:run -Drun.arguments="--products=163841689525773"
+
+> **Lancer en utilisant votre IDE préféré:**
+>- Il faut lancer la main class **com.xpeedit.XpeeditApplication** en lui passant les produits en argument **--products=163841689525773**
