@@ -36,3 +36,16 @@ Robot optimisé: 163/82/46/19/8/55/73/7   => 8  cartons utilisés
 
 Solution
 --------
+#### Stack technique
+- Java 8
+- Spring Boot pour une configuration simplifiée de l'application 
+- Maven pour build/test/run
+
+#### Organisation du code
+test/com.xpeedit.service
+
+#### Installation et démarrage
+- Installer Java 8 (depuis le Oracle website).
+- (Optionnel) Installer Maven 3.5.
+You normally don’t have to install anything, as it will automatically install the Maven Wrapper for you.
+> mvnw.cmd test
